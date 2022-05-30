@@ -1,29 +1,29 @@
 import { CollectionDto } from '../../dtos/collections';
-import { makeAutoObservable } from 'mobx';
+import { computed, makeAutoObservable, observable } from 'mobx';
 import { getCollections } from '../../api/collections';
 
 
-class Collections {
-  collections: CollectionDto[] = [];
-  error: unknown = null;
-  loading: boolean = false;
+export class Collections {
+  @observable collections: CollectionDto[] = [];
+  @observable error: unknown = null;
+  @observable loading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
-  setCollection(collection: CollectionDto[]) {
+  @computed setCollection(collection: CollectionDto[]) {
     this.collections = collection;
   }
 
-  setError(error: unknown) {
+  @computed setError(error: unknown) {
     this.error = error;
   }
 
-  setLoading(value: boolean) {
+  @computed setLoading(value: boolean) {
     this.loading = value;
   }
 
-  async getCollections() {
+  @computed async getCollections() {
     try {
       this.setLoading(true);
       const { data } = await getCollections();

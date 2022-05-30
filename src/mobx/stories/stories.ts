@@ -1,29 +1,29 @@
 import { StorieDto } from '../../dtos/stories';
-import { makeAutoObservable } from 'mobx';
+import { computed, makeAutoObservable, observable } from 'mobx';
 import { getStories } from '../../api/stories';
 
 
-class Stories {
-  stories: StorieDto[] = [];
-  error: unknown = null;
-  loading: boolean = false;
+export class Stories {
+  @observable stories: StorieDto[] = [];
+  @observable error: unknown = null;
+  @observable loading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
   }
-  setStories(stories: StorieDto[]) {
+  @computed setStories(stories: StorieDto[]) {
     this.stories = stories;
   }
 
-  setError(error: unknown) {
+  @computed setError(error: unknown) {
     this.error = error;
   }
 
-  setLoading(value: boolean) {
+  @computed setLoading(value: boolean) {
     this.loading = value;
   }
 
-   async getStories() {
+  @computed async getStories() {
     try {
       this.setLoading(true);
       const { data } = await getStories();
