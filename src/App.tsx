@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Collections } from './components/Collections';
+import { Stories } from './components/Stories';
 
-function App() {
+import 'swiper/swiper.min.css'
+import 'swiper/components/pagination/pagination.min.css'
+import 'swiper/components/navigation/navigation.min.css'
+import 'swiper/components/scrollbar/scrollbar.min.css'
+
+const useStyles = makeStyles((theme: Theme) => ({
+  wrappedRoot: {
+    backgroundImage: 'linear-gradient(#e66465, #9198e5)',
+    outline: '1px solid',
+    margin: '-10px',
+    display: 'grid',
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  root: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    minHeight: 1000,
+    width: 520,
+    display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width: 650px)' : {
+      maxWidth: '350px',
+      minHeight: 700,
+    }
+  }
+}));
+
+export const App = () => {
+  const styles = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid className={styles.wrappedRoot}>
+      <Grid className={styles.root}>
+      <Grid>
+        <Collections/>
+      </Grid>
+      <Grid>
+        <Stories/>
+      </Grid>
+      </Grid>
+    </Grid>
   );
 }
-
-export default App;
