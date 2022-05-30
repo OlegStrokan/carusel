@@ -10,6 +10,11 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 import 'swiper/components/pagination/pagination.min.css'
 import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/scrollbar/scrollbar.min.css'
+import { collectionState } from './mobx/collections/collections';
+import { storiesState } from './mobx/stories/stories';
+import CircularProgress from '@mui/material/CircularProgress';
+import { initState } from './mobx/init/init';
+import { observer } from 'mobx-react-lite';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrappedRoot: {
@@ -20,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#fff',
   },
   root: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     minHeight: 1000,
     width: 520,
@@ -36,18 +41,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const App = () => {
+export const App = observer(() => {
+
   const styles = useStyles();
+
+  React.useEffect(() => {
+    initState.getData()
+  }, [])
+
+  console.log(initState.isInit)
   return (
     <Grid className={styles.wrappedRoot}>
       <Grid className={styles.root}>
-      <Grid>
-        <Collections/>
-      </Grid>
-      <Grid>
-        <Stories/>
-      </Grid>
+        {
+          initState.isInit
+            ?
+        <>
+          <Grid>
+            <Collections/>
+          </Grid>
+          <Grid>
+            <Stories/>
+          </Grid>
+        </>
+          : <Grid><CircularProgress /></Grid>
+        }
+
       </Grid>
     </Grid>
   );
-}
+})

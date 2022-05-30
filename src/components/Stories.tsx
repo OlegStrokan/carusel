@@ -1,7 +1,6 @@
 import React from 'react';
 import { CardMedia, Grid, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import { collectionState } from '../mobx/collections/collections';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import { makeStyles } from '@mui/styles';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,8 +16,8 @@ import { storiesState } from '../mobx/stories/stories';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '420px',
-    margin: '0 auto',
+    maxWidth: '430px',
+    margin: 'auto',
     '@media (max-width: 650px)' : {
       width: '330px',
     }
@@ -32,9 +31,6 @@ const useStyles = makeStyles({
       height: 300,
       width: 300,
     }
-  },
-  preloader: {
-    justifyContent: 'center'
   },
   title: {
     padding: '15px',
@@ -58,17 +54,10 @@ SwiperCore.use([Keyboard, Scrollbar, Pagination, Navigation])
 
 export const Stories = observer(() => {
 
-
   const styles = useStyles();
-  React.useEffect(() => {
-    storiesState.getStories()
-  }, [])
-
-
 
   return (
     <Grid className={styles.root}>
-      {storiesState.loading ?  <Grid><CircularProgress className={styles.preloader} /></Grid> :
         <Grid>
           <Typography variant="h4" className={styles.title}>Stories</Typography>
           <Swiper
@@ -87,7 +76,7 @@ export const Stories = observer(() => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </Grid>}
+        </Grid>
     </Grid>
 
   );

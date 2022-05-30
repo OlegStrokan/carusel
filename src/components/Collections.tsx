@@ -9,13 +9,14 @@ import SwiperCore, {
   Keyboard,
   Scrollbar,
   Pagination,
-  Navigation,
+  Navigation, EffectFlip,
 } from 'swiper'
+import { storiesState } from '../mobx/stories/stories';
 
 
 const useStyles = makeStyles( {
   root: {
-    maxWidth: '520px',
+    maxWidth: '530px',
     '@media (max-width: 650px)' : {
       maxWidth: '320px',
     }
@@ -29,8 +30,6 @@ const useStyles = makeStyles( {
       height: 150,
       width: 300,
     }
-  },
-  preloader: {
   },
   title: {
     padding: '15px',
@@ -50,21 +49,16 @@ const useStyles = makeStyles( {
   },
 })
 
-SwiperCore.use([Keyboard, Scrollbar, Pagination, Navigation])
+SwiperCore.use([Keyboard, Scrollbar, Pagination, Navigation, EffectFlip])
 
 export const Collections = observer(() => {
 
 
   const styles = useStyles();
-  React.useEffect(() => {
-    collectionState.getCollections()
-  }, [])
-
 
 
   return (
     <Grid className={styles.root}>
-      {collectionState.loading ?  <Grid><CircularProgress className={styles.preloader} /></Grid> :
         <Grid>
       <Typography variant="h4" className={styles.title}>Collections</Typography>
       <Swiper
@@ -74,7 +68,7 @@ export const Collections = observer(() => {
         navigation
         pagination
         className={styles.swiperContainer}
-
+        effect="flip"
       >
         {collectionState.collections.map((image, index) => (
           <SwiperSlide
@@ -84,7 +78,7 @@ export const Collections = observer(() => {
           </SwiperSlide>
         ))}
       </Swiper>
-        </Grid>}
+        </Grid>
       </Grid>
 
   );
