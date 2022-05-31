@@ -2,6 +2,7 @@
   "name": "carusel",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://olegstrokan.github.io/carusel/",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -9,6 +10,7 @@
     "@mui/material": "^5.8.1",
     "@mui/styles": "^5.8.0",
     "axios": "^0.27.2",
+    "gh-pages": "^4.0.0",
     "mobx": "^6.6.0",
     "mobx-react-lite": "^3.4.0",
     "react": "^18.1.0",
@@ -32,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages dev -d build",
+    "predeploy": "yarn build"
   },
   "eslintConfig": {
     "extends": [

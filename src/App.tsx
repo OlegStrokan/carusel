@@ -10,8 +10,6 @@ import 'swiper/components/effect-cube/effect-cube.min.css'
 import 'swiper/components/pagination/pagination.min.css'
 import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/scrollbar/scrollbar.min.css'
-import { collectionState } from './mobx/collections/collections';
-import { storiesState } from './mobx/stories/stories';
 import CircularProgress from '@mui/material/CircularProgress';
 import { initState } from './mobx/init/init';
 import { observer } from 'mobx-react-lite';
@@ -22,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     outline: '1px solid',
     margin: '-10px',
     display: 'grid',
-    height: '100vh',
+    minHeight: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
     color: '#fff',
