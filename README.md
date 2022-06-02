@@ -10,8 +10,11 @@
 
 ## Running app
 
-install all needed requirements
+Install all needed requirements
+
 ```yarn intall```
+
+Running the app
 
 ```yarn start```
 
